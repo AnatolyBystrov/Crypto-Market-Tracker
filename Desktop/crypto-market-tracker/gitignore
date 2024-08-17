@@ -1,0 +1,13 @@
+# Ignore system files
+.DS_Store
+*.swp
+*.lock
+
+# Ignore node modules
+node_modules/
+
+# Ignore log files
+*.log
+
+# Ignore everything outside this directory
+/*
