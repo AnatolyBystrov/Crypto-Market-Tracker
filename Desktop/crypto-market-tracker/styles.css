@@ -1,0 +1,373 @@
+/* Общие стили */
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--background-color);
+    color: var(--text-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden; /* Оставляем только горизонтальное скрытие */
+}
+
+/* Темы */
+:root {
+    --background-color: #f4f6f9;
+    --text-color: #343a40;
+    --card-background-color: rgba(255, 255, 255, 0.8);
+    --header-text-color: #fff;
+    --button-background-color: #007bff;
+    --button-text-color: #fff;
+    --button-hover-background-color: #0056b3;
+}
+
+body.dark-mode {
+    --background-color: #181818;
+    --text-color: #f8f9fa;
+    --card-background-color: rgba(28, 28, 28, 0.9); /* Более темный фон для карточек */
+    --header-text-color: #ff7e5f; /* Цвет текста хедера в темном режиме */
+    --button-background-color: #ff7e5f;
+    --button-text-color: #fff;
+    --button-hover-background-color: #feb47b;
+}
+
+header {
+    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    color: var(--header-text-color);
+    padding: 2rem;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    position: relative;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crypto-icon {
+    width: 40px; /* Установите желаемый размер */
+    height: 40px; /* Установите желаемый размер */
+    margin-right: 10px; /* Отступ между иконкой и текстом */
+}
+
+header h1 {
+    font-size: 3.5rem;
+    text-shadow: 2px 2px 12px rgba(0, 0, 0, 0.7);
+    background: linear-gradient(135deg, #ff7e5f, #feb47b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: var(--header-text-color); /* Явный цвет текста для заголовка */
+}
+
+/* Контролы */
+#controls {
+    margin: 1rem 0;
+    text-align: center;
+}
+
+#controls button {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#controls button:hover {
+    background-color: var(--button-hover-background-color);
+    transform: scale(1.05);
+}
+
+/* Карточки криптовалют */
+#crypto-data {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
+
+.crypto-card {
+    background: var(--card-background-color); /* Используем переменную для фона */
+    color: var(--text-color); /* Используем переменную для текста */
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 0.8s ease-in-out;
+    animation-fill-mode: forwards;
+}
+
+.crypto-card img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 1rem;
+}
+
+.crypto-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(0, 200, 255, 0.2), rgba(255, 0, 150, 0.2));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 0;
+}
+
+.crypto-card:hover::before {
+    opacity: 1;
+}
+
+.crypto-card:hover {
+    transform: translateY(-10px) scale(1.05);
+    box-shadow: 0 16px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* Заголовки и текст внутри карточек */
+.crypto-card h2 {
+    margin: 0;
+    font-size: 1.75rem;
+    color: var(--text-color); /* Используем переменную для текста */
+}
+
+.crypto-card p.price {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+    color: #28a745;
+    font-weight: bold;
+}
+
+.crypto-card p.change {
+    margin: 0.5rem 0;
+    font-size: 1.25rem;
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* График внутри карточек */
+.chart-container {
+    width: 100%;
+    height: 200px;
+    margin-top: 1.5rem;
+}
+
+/* Кнопки */
+button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    border: none;
+    color: #fff;
+    background-color: #007bff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 0 0.5rem;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+}
+
+/* Переключатель тем */
+.switch {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 34px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Фоновые частицы */
+.particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
+
+.particle {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 50%;
+    opacity: 0;
+    animation: particleAnimation 10s infinite;
+}
+
+@keyframes particleAnimation {
+    from {
+        transform: translateY(0) scale(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(-1000px) scale(2);
+        opacity: 0;
+    }
+}
+
+/* Стили для кнопки "Назад" */
+#back-button {
+    background-color: #ff7e5f;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: absolute; /* Абсолютное позиционирование */
+    top: 20px; /* Отступ сверху */
+    left: 20px; /* Отступ слева */
+}
+
+#back-button:hover {
+    background-color: #feb47b;
+    transform: scale(1.05);
+}
+
+/* Контейнер с деталями криптовалюты */
+.crypto-details-card {
+    background: var(--card-background-color); /* Используем переменную для фона */
+    color: var(--text-color); /* Используем переменную для текста */
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease-in-out;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    padding-top: 3rem; /* Отступ сверху для кнопки */
+}
+
+.crypto-details-card img {
+    width: 100px;
+    height: 100px;
+    margin-bottom: 1rem;
+}
+
+.crypto-details-card h2 {
+    font-size: 2rem;
+    color: var(--text-color);
+}
+
+.crypto-details-card p.description {
+    margin: 1rem 0;
+    font-size: 1.25rem;
+    color: var(--text-color);
+}
+
+/* Стили для кнопок временных интервалов */
+.timeframe-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.timeframe {
+    background-color: var(--button-background-color);
+    color: var(--button-text-color);
+    border: none;
+    padding: 10px 15px;
+    margin: 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.timeframe:hover {
+    background-color: var(--button-hover-background-color);
+    transform: scale(1.05);
+}
+
+/* Детали криптовалюты */
+#crypto-details {
+    display: none;
+    width: 100%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 0 2rem;
+}
